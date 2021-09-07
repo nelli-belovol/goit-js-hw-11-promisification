@@ -17,21 +17,17 @@ const toggleUserState = (allUsers, userName) => {
 
   return new Promise((resolve, reject) => {
     if (updatedUsers) {
-      resolve();
+      resolve(updatedUsers);
+    } else {
+      reject('error');
     }
   });
 };
-
 const logger = updatedUsers => console.table(updatedUsers);
 
-/*
- * Сейчас работает так
- */
-toggleUserState(users, 'Mango', logger);
-toggleUserState(users, 'Lux', logger);
-
-/*
- * Должно работать так
- */
-toggleUserState(users, 'Mango').then(logger);
-toggleUserState(users, 'Lux').then(logger);
+toggleUserState(users, 'Mango')
+  .then(logger)
+  .catch(error => console.log(error));
+toggleUserState(users, 'Lux')
+  .then(logger)
+  .catch(error => console.log(error));
